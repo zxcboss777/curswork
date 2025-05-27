@@ -3,3 +3,5 @@ ignore = E203, E266, E501, W503, W391, F811, W291, F841
 max-line-length = 119
 max-complexity = 10
 exclude = .git,__pycache__,venv
+
+

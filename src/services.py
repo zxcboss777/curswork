@@ -151,3 +151,4 @@ def convert(amount: float, from_curr: str, to_curr: str = "USD") -> float:
         raise CurrencyServiceError(f"Нет курса для {from_curr}")
     return amount / rate
 
+

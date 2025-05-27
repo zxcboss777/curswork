@@ -124,3 +124,4 @@ def spend_by_category(
     }
     logger.debug("Spend by category result: %s", result)
     return result
+

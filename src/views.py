@@ -15,15 +15,10 @@ import pandas as pd
 
 # собственный логгер проекта
 from .logger import logger
-
 # бизнес-утилиты
-from .utils import card_info
-from .utils import get_currency_rates
-from .utils import get_stock_prices
-from .utils import json_response
-from .utils import read_transactions
-from .utils import send_greeting
-from .utils import top_transactions
+from .utils import (card_info, get_currency_rates, get_stock_prices,
+                    json_response, read_transactions, send_greeting,
+                    top_transactions)
 
 # ──────────────────────────────────────────────────────────────────────────
 
@@ -109,3 +104,6 @@ def events(df: pd.DataFrame) -> Dict[str, Any]:
         .to_dict(orient="records")
     )
     return json_response({"events": selection})
+
+
+

@@ -152,3 +152,4 @@ def get_stock_prices(stocks: List[str]) -> List[Dict[str, Any]]:
 
 def format_money(amount: float, currency: str = "USD") -> str:
     return f"{amount:,.2f} {currency}"
+
