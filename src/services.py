@@ -65,11 +65,11 @@ def investment_bank(month: str, transactions: List[Dict[str, Any]], limit: int) 
 
 # ---------------- Поиск по телефону ----------------
 
+
 logger = logging.getLogger(__name__)
 
 PHONE_RE = re.compile(r"(\+7\s?\d{3}\s?\d{3}[-\s]?\d{2}[-\s]?\d{2})")
 
-def simple_search(query: str, transactions: List[dict]) -> Dict:
 
 def phone_search(transactions: List[Dict[str, Any]]) -> str:
     matched = [t for t in transactions if PHONE_RE.search(str(t.get("Описание", "")))]
@@ -106,7 +106,6 @@ class CurrencyServiceError(RuntimeError):
 @lru_cache(maxsize=1)  # кэшируем на время life-run тестов
 def get_rates(base: str = "USD") -> Dict[str, float]:
     """
-    Найти транзакции, где `query` входит в поле `description` (регистр не важен).
     Возвращает словарь {'RUB': 94.1, 'EUR': 0.92, …} для указанной base-валюты.
     """
     if not API_KEY:
@@ -124,25 +123,11 @@ def get_rates(base: str = "USD") -> Dict[str, float]:
     except (ValueError, KeyError) as exc:
         raise CurrencyServiceError("Некорректный ответ currencyapi") from exc
 
-    Parameters
-    ----------
-    query:
-        Строка-запрос.
-    transactions:
-        Коллекция транзакций вида::
     return {code: float(info["value"]) for code, info in data.items()}
 
-            {"description": "Coffee shop", "amount": -300, ...}
 
-    Returns
-    -------
-    dict
-        JSON-объект с полями ``query``, ``count`` и ``items``.
 def convert(amount: float, from_curr: str, to_curr: str = "USD") -> float:
     """
-    q = query.lower()
-    found = [txn for txn in transactions if q in str(txn.get("description", "")).lower()]
-    return {"query": query, "count": len(found), "items": found}
     Конвертирует сумму через свежие курсы. При необходимости кэш обновляется.
     """
     rates = get_rates(base=to_curr.upper())
@@ -150,5 +135,4 @@ def convert(amount: float, from_curr: str, to_curr: str = "USD") -> float:
     if rate is None:
         raise CurrencyServiceError(f"Нет курса для {from_curr}")
     return amount / rate
-
 

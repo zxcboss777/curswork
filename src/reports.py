@@ -46,6 +46,17 @@ def spending_by_category(df: pd.DataFrame, category: str, since: str) -> Dict:
         .sum()
         .reset_index()
         .to_dict(orient="records")
+    )
+
+    result = {
+        "category": category,
+        "period": {"from": str(start.date()), "to": str(end.date())},
+        "total_spent": float(subtotal),
+        "daily_breakdown": daily,
+    }
+    return result
+
+
 from .logger import logger
 
 REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
@@ -113,15 +124,8 @@ def spend_by_category(
     total = float(df.loc[mask, "Сумма платежа"].sum())
 
     return {
-    result = {
-        "category": category,
-        "period": {"from": str(start.date()), "to": str(end.date())},
-        "total_spent": float(subtotal),
-        "daily_breakdown": daily,
         "total_spent": round(total, 2),
         "date_from": start_date.strftime("%Y-%m-%d"),
         "date_to": end_date.strftime("%Y-%m-%d"),
     }
-    logger.debug("Spend by category result: %s", result)
-    return result
 
