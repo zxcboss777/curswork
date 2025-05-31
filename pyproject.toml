@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "finance_app"
+name = "coursework-1"
+version = "0.1.0"
+description = "Demo course project"
+authors = ["Ваше Имя <email@example.com>"]
+description = "Demo coursework project"
+authors = ["Danilka <Gipno262@gmail.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.2"
+openpyxl = "^3.1"
+python = "^3.10"
+pandas = "*"
+requests = "*"
+openpyxl = "*"
+
+# Разработочные зависимости (линтеры, форматтеры и т.д.)
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1"
+pytest-mock = "^3.14"
+mypy = "^1.10"
+flake8 = "^7.0"
+isort = "^5.13"
+black = "^24.4"
+python-dotenv = "^1.0.1"
+flake8 = "^6.1.0"
+pylint = "^2.17.4"
+mypy = "^1.9.0"
+black = "^24.3.0"
+isort = "^5.13.2"
+pytest = "^8.1.1"  # опционально: для тестирования
+pre-commit = "^3.3.3"  # опционально: для автоматической проверки перед коммитом
+
+# --- форматирование ---------------------------------------------------------
+# Конфигурация Black
+[tool.black]
+line-length = 119
+target-version = ["py311"]
+exclude = '''
+/(
+    \.git
+)/
+'''
+exclude = '.git|venv'
+
+# Конфигурация isort
+[tool.isort]
+profile = "black"
+line_length = 119
+skip_gitignore = true
+
+# --- статический анализ -----------------------------------------------------
+# Конфигурация mypy
+[tool.mypy]
+python_version = "3.11"
+disallow_untyped_defs = true
+warn_return_any = true
+exclude = "(venv|\\.git)"
+exclude = 'venv'
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+
